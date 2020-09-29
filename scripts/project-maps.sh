@@ -10,6 +10,7 @@ OUTPUT_DIR=${SCRIPT_DIR}/../public/projected_maps
 mkdir -p "${OUTPUT_DIR}"
 
 for file in ${MAPS_DIR}/*.json; do
+
     fn=$(basename ${file})
     topo2geo districts=- -i "$file" | geoproject "d3.geoMercator().fitSize([${WIDTH}, ${HEIGHT}], d)" | geo2topo districts=- -o "${OUTPUT_DIR}/${fn}"
 done
